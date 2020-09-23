@@ -3,7 +3,12 @@
 #include <array>
 #include "stb_image_write.h"
 #include "png_toolkit.h"
-
+#include <iostream>
+#include <fstream>
+#include <iterator> 
+#include <string>
+#include <vector>
+using namespace std;
 png_toolkit::png_toolkit()
 {
 }
@@ -26,6 +31,8 @@ bool png_toolkit::save( const std::string &pictureName )
                    imgData.compPerPixel,
                           imgData.pixels, 0) != 0;
 }
+
+
 
 
 image_data png_toolkit::getPixelData( void ) const
