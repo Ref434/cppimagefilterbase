@@ -2,4 +2,4 @@ cmake_minimum_required(VERSION 2.8)
 
 project(student_toolkit)
 add_executable(${FiltersForImages} "main.cpp" "png_toolkit.cpp" "png_toolkit.h"
-    "stb_image.h" "stb_image_write.h" "FilterRed.h" "FilterRed.cpp" "FilterBW.h" "FilterBW.cpp")
+    "stb_image.h" "stb_image_write.h" "FilterRed.h" "FilterRed.cpp" "FilterBW.h" "FilterBW.cpp" "BasicFilter.cpp" "BasicFilter.h")
