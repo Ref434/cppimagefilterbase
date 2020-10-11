@@ -9,11 +9,10 @@
 struct coordinates_filter
 {
 	int u, l, b, r;
-	std::string str;
 };
 class BasicFilter {
 public:
-	BasicFilter(std::string const &config, png_toolkit *png, std::string FilterName);
+	BasicFilter(coordinates_filter coordFilter);
 	virtual void action(png_toolkit *png)=0;
 	coordinates_filter coordFilter;
 

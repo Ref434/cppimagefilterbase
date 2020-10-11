@@ -21,4 +21,5 @@ void FilterRed::action(png_toolkit *png)
 			*(imgData.pixels + i + 2) = 0;
 		}
 	}
+	cout << coordFilter.u << " " << coordFilter.l << " " << coordFilter.b << " " << coordFilter.r << " " << endl;
 }
