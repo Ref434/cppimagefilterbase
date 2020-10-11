@@ -16,12 +16,12 @@ int main( int argc, char *argv[] )
 
         png_toolkit studTool;
         studTool.load(argv[2]);
-		FilterRed Red(argv[1], &studTool,"Red");
+		/*FilterRed Red(argv[1], &studTool,"Red");
 		BasicFilter *Filter = &Red;
 		Filter->action(&studTool);
 		FilterBW BW(argv[1], &studTool, "BW");
 		BasicFilter *Filter1 = &BW;
-		Filter1->action(&studTool);
+		Filter1->action(&studTool);*/
         studTool.save(argv[3]);
 
     }
