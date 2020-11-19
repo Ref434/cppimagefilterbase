@@ -20,7 +20,11 @@ int main( int argc, char *argv[] )
 		image_data imgData = studTool.getPixelData();
 		CfgReader CfgReader(argv[1], &studTool);
 		BasicFilter *Filter;
-		for (int i = 0; i < CfgReader.num_filtres; i++)
+		cout << CfgReader.num_filtres << endl;
+		FilterRed Red(CfgReader.coordFilter[0]);
+		Filter = &Red;
+		Filter->action(imgData);
+		/*for (int i = 0; i < CfgReader.num_filtres; i++)
 		{
 			switch (CfgReader.coordFilter[i].type)
 			{
@@ -65,7 +69,7 @@ int main( int argc, char *argv[] )
 			default:
 				break;
 			}
-		}
+		}*/
         studTool.save(argv[3]);
 
     }
