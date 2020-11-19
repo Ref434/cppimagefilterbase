@@ -4,6 +4,7 @@
 #include "FilterBW.h"
 #include "CfgReader.h"
 #include "Threshold.h"
+#include "Edge.h"
 #include "Blur.h"
 using namespace std;
 
@@ -25,11 +26,11 @@ int main( int argc, char *argv[] )
 		FilterRed Red(CfgReader.coordFilter[0]);
 		Filter = &Red;
 		Filter->action(imgData);
-		Blur Blur(CfgReader.coordFilter[2]);
+		Edge Edge(CfgReader.coordFilter[2]);
 		FilterBW BW1(CfgReader.coordFilter[2]);
 		Filter = &BW1;
 		Filter->action(imgData);
-		Filter = &Blur;
+		Filter = &Edge;
 		Filter->action(imgData);
 
 		Threshold Threshold(CfgReader.coordFilter[1]);
@@ -38,6 +39,10 @@ int main( int argc, char *argv[] )
 		Filter->action(imgData);
 
 		Filter = &Threshold;
+		Filter->action(imgData);
+
+		Blur blur(CfgReader.coordFilter[3]);
+		Filter = &blur;
 		Filter->action(imgData);
 		/*for (int i = 0; i < CfgReader.num_filtres; i++)
 		{

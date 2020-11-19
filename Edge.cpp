@@ -1,8 +1,8 @@
-#include "Blur.h"
+#include "Edge.h"
 using namespace std;
 #include <iostream>
 
-void Blur::action(image_data &imgData)
+void Edge::action(image_data &imgData)
 {
 
 	image_data CopyImgData = imgData;
@@ -20,7 +20,7 @@ void Blur::action(image_data &imgData)
 	for (int i = coordFilter.u; i < coordFilter.b; ++i) {
 		for (int j = coordFilter.l; j < coordFilter.r; ++j) {
 			int ptr = (i*imgData.w + j)*imgData.compPerPixel;
-			unsigned char col1 = (unsigned char)0, col2 = (unsigned char)0, col3 = (unsigned char)0;
+			int col1 = 0, col2 = 0, col3 = 0;
 			for (int k = i - 1; k <= i + 1; k++)
 			{
 				if (k >= coordFilter.u && k < coordFilter.b)
@@ -29,20 +29,22 @@ void Blur::action(image_data &imgData)
 						if (s >= coordFilter.l && s < coordFilter.r)
 						{
 							int ptrInt = (k*CopyImgData.w + s)*CopyImgData.compPerPixel;
-								col1 += CopyImgData.pixels[ptrInt + 0];
-								col2 += CopyImgData.pixels[ptrInt + 1];
-								col3 += CopyImgData.pixels[ptrInt + 2];
+							if(k==i && s==j)
+								col1 += 9*CopyImgData.pixels[ptrInt + 0];
+							else
+								col1 -=   CopyImgData.pixels[ptrInt + 0];
 						}
 						//cout << a << endl;
 
 					}
 			}
-			col1 /= 9;
-			col2 /= 9;
-			col3 /= 9;
-			imgData.pixels[ptr + 0] = (unsigned char)col1;
-			imgData.pixels[ptr + 1] = (unsigned char)col2;
-			imgData.pixels[ptr + 2] = (unsigned char)col3;
+			if (col1 > 255)
+				col1 = 255;
+			if (col1 < 0)
+				col1 = 0;
+				imgData.pixels[ptr + 0] = (unsigned char)col1;
+				imgData.pixels[ptr + 1] = (unsigned char)col1;
+				imgData.pixels[ptr + 2] = (unsigned char)col1;
 		}
 	}
 	delete CopyImgData.pixels;
