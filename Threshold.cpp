@@ -39,7 +39,7 @@ void Threshold::action(image_data &imgData)
 				int intensity = (3 * CopyImgData.pixels[ptr + 0] + 6 * CopyImgData.pixels[ptr + 1] + CopyImgData.pixels[ptr + 2]) / 10;
 				sort(v.begin(), v.end());
 				//cout << v.size()<< endl;
-				if (CopyImgData.pixels[ptr] < v[v.size()/2])
+				if (intensity < v[v.size()/2])
 				{
 					//cout << "1" << endl;
 					imgData.pixels[ptr + 0] = (unsigned char)0;
