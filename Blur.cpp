@@ -20,7 +20,7 @@ void Blur::action(image_data &imgData)
 	for (int i = coordFilter.u; i < coordFilter.b; ++i) {
 		for (int j = coordFilter.l; j < coordFilter.r; ++j) {
 			int ptr = (i*imgData.w + j)*imgData.compPerPixel;
-			unsigned char col1 = (unsigned char)0, col2 = (unsigned char)0, col3 = (unsigned char)0;
+			int col1 = 0, col2 = 0, col3 = 0;
 			for (int k = i - 1; k <= i + 1; k++)
 			{
 				if (k >= coordFilter.u && k < coordFilter.b)
