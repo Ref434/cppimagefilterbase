@@ -24,6 +24,13 @@ int main( int argc, char *argv[] )
 		FilterRed Red(CfgReader.coordFilter[0]);
 		Filter = &Red;
 		Filter->action(imgData);
+		Threshold Threshold(CfgReader.coordFilter[1]);
+		FilterBW BW(CfgReader.coordFilter[1]);
+		Filter = &BW;
+		Filter->action(imgData);
+
+		Filter = &Threshold;
+		Filter->action(imgData);
 		/*for (int i = 0; i < CfgReader.num_filtres; i++)
 		{
 			switch (CfgReader.coordFilter[i].type)
