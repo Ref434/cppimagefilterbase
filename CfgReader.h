@@ -25,7 +25,7 @@ class CfgReader
 {
 	
 	public:
-		static const int num_filtres=1;
+		static const int num_filtres=2;
 		CfgReader(std::string const &config, png_toolkit *png);
 		coordinates_filter coordFilter[num_filtres];
 };
