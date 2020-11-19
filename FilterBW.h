@@ -10,7 +10,7 @@
 class FilterBW:public BasicFilter {
 public:
 	using BasicFilter::BasicFilter;
-	void action(png_toolkit *png);
+	void action(image_data &imgData);
 
 };
 

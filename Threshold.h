@@ -1,13 +1,13 @@
-#ifndef RED_FILTER_H
-#define RED_FILTER_H
-#include <string>
+#ifndef THRESHOLD_H
+#define THRESHOLD_H
 #include <iostream>
-#include <map>
 #include "png_toolkit.h"
 #include "BasicFilter.h"
+#include <vector>
+#include <algorithm> 
 
 
-class FilterRed :public BasicFilter {
+class Threshold :public BasicFilter {
 public:
 	using BasicFilter::BasicFilter;
 	void action(image_data &imgData);
@@ -15,4 +15,6 @@ public:
 };
 
 
+
 #endif 
+

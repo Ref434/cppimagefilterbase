@@ -1,24 +1,17 @@
 #include "FilterBW.h"
+using namespace std;
+#include <iostream>
 
-
-void FilterBW::action(png_toolkit *png)
+void FilterBW::action(image_data &imgData)
 {
-	image_data imgData = png->getPixelData();
-	int coord_i = 0, coord_j = 0;
-	for (int i = 0; i < imgData.compPerPixel*imgData.w*imgData.h; i += 3)
-	{
-		coord_i += 3;
-		if (coord_i >= imgData.w*imgData.compPerPixel)
-		{
-			coord_j += 1;
-			coord_i = 0;
-		}
-		if (coord_i >= coordFilter.l*imgData.compPerPixel && coord_j >= coordFilter.u && coord_i <= coordFilter.r*imgData.compPerPixel && coord_j <= coordFilter.b)
-		{
-			int x = int(0.3**(imgData.pixels + i) + 0.6**(imgData.pixels + i + 1) + 0.1**(imgData.pixels + i + 2));
-			*(imgData.pixels + i) = x;
-			*(imgData.pixels + i + 1) = x;
-			*(imgData.pixels + i + 2) = x;
+	cout << coordFilter.u << " " << coordFilter.b << " " << coordFilter.l << " " << coordFilter.r << " " << endl;
+	for (int i = coordFilter.u; i < coordFilter.b; ++i) {
+		for (int j = coordFilter.l; j < coordFilter.r; ++j) {
+			int ptr = (i*imgData.w + j)*imgData.compPerPixel;
+			int x = int(0.3*(imgData.pixels[ptr]) + 0.6*(imgData.pixels[ptr + 1]) + 0.1*(imgData.pixels[ptr + 2]));
+			imgData.pixels[ptr] = (unsigned char)x;
+			imgData.pixels[ptr + 1] = (unsigned char)x;
+			imgData.pixels[ptr + 2] = (unsigned char)x;
 		}
 	}
 }

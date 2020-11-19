@@ -4,32 +4,42 @@
 #include <string>
 using namespace std;
 
-CfgReader::CfgReader(std::string const &config, png_toolkit *png,coordinates_filter *coordFilter)
+CfgReader::CfgReader(std::string const &config, png_toolkit *png)
 {
 	image_data imgData = png->getPixelData();
-	string str;
 	ifstream file(config);
+	string str;
 	if (!file) {
 		std::cout << "File not open!";
 		exit(0);
 	}
-	file >> str >> coordFilter->u >> coordFilter->l >> coordFilter->b >> coordFilter->r;
+	for (int i = 0; i < num_filtres; i++)
+	{
+		file >> str >> coordFilter[i].u >> coordFilter[i].l >> coordFilter[i].b >> coordFilter[i].r;
+		if (str == "red")	
+			coordFilter[i].type = RED_FILTER;
+		if (str == "threshold")
+			coordFilter[i].type = THRESHOLD_FILTER;
+		if (str == "blur")
+			coordFilter[i].type = BLUR_FILTER;
+		if (str == "edge")
+			coordFilter[i].type = EDGE_FILTER;
+		if (coordFilter[i].u != 0)
+		{
+			coordFilter[i].u = int(imgData.h / coordFilter[i].u);
+		}
+		if (coordFilter[i].l != 0)
+		{
+			coordFilter[i].l = int(imgData.w / coordFilter[i].l);
+		}
+		if (coordFilter[i].b != 0)
+		{
+			coordFilter[i].b = int(imgData.h / coordFilter[i].b);
+		}
+		if (coordFilter[i].r != 0)
+		{
+			coordFilter[i].r = int(imgData.w / coordFilter[i].r);
+		}
+	}
 	file.close();
-		cout << "Using " << str << " Filter" << endl;
-		if (coordFilter->u != 0)
-		{
-			coordFilter->u = int(imgData.h / coordFilter->u);
-		}
-		if (coordFilter->l != 0)
-		{
-			coordFilter->l = int(imgData.w / coordFilter->l);
-		}
-		if (coordFilter->b != 0)
-		{
-			coordFilter->b = int(imgData.h / coordFilter->b);
-		}
-		if (coordFilter->r != 0)
-		{
-			coordFilter->r = int(imgData.w / coordFilter->r);
-		}
 }

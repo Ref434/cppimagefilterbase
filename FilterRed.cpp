@@ -2,9 +2,8 @@
 using namespace std;
 #include <iostream>
 
-void FilterRed::action(png_toolkit *png)
+void FilterRed::action(image_data &imgData)
 {
-	image_data imgData = png->getPixelData();
 	for (int i = coordFilter.u; i < coordFilter.b; ++i) {
 		for (int j = coordFilter.l; j < coordFilter.r; ++j) {
 			int ptr = (i*imgData.w + j)*imgData.compPerPixel;

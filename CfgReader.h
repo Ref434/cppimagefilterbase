@@ -4,13 +4,30 @@
 #include <iostream>
 #include <map>
 #include "png_toolkit.h"
-#include "BasicFilter.h"
 
+typedef enum filter_type {
+	RED_FILTER,
+	THRESHOLD_FILTER,
+	BLUR_FILTER,
+	EDGE_FILTER
+} filter_type_t;
+struct coordinates_filter
+{
+	int u; 
+	int l;
+	int b;
+	int r;
+	filter_type_t type;
+	
+};
 
 class CfgReader
 {
+	
 	public:
-		CfgReader(std::string const &config, png_toolkit *png, coordinates_filter *coordFilter);
+		static const int num_filtres=1;
+		CfgReader(std::string const &config, png_toolkit *png);
+		coordinates_filter coordFilter[num_filtres];
 };
 
 

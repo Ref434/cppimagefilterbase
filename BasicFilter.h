@@ -5,15 +5,12 @@
 #include <iostream>
 #include <map>
 #include "png_toolkit.h"
+#include "CfgReader.h"
 
-struct coordinates_filter
-{
-	int u, l, b, r;
-};
 class BasicFilter {
 public:
 	BasicFilter(coordinates_filter coordFilter);
-	virtual void action(png_toolkit *png)=0;
+	virtual void action(image_data &imgData)=0;
 	coordinates_filter coordFilter;
 
 };
